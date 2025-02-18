@@ -7,13 +7,21 @@ import Dashboard from './components/Admin/Dashboard';
 import Customers from './components/Admin/Customers';
 import Payments from './components/Admin/Payments';
 import Settings from './components/Admin/Settings';
+import Home from './components/Home';
+import Product from './components/Product';
 import './App.css';
+import Category from './components/Category';
+import Contact from './components/Contact';
 
 function App() {
     return (
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/products" element={<Product />} />
+                    <Route path="/category" element={<Category />} />
+                    <Route path="/contact" element={<Contact />} />
                     <Route path="/admin">
                         <Route path="dashboard" element={<Dashboard />} />
                         <Route path="customers" element={<Customers />} />

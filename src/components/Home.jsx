@@ -1,6 +1,22 @@
 import Layout from './Layout';
 import { useState } from 'react';
-const Products = () => {
+import { Swiper, SwiperSlide } from 'swiper/react';
+import {
+    Navigation,
+    Pagination,
+    Scrollbar,
+    A11y,
+    Autoplay,
+} from 'swiper/modules';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+
+const Home = () => {
     const [products, setProducts] = useState([
         {
             title: "Men's Shirt",
@@ -44,13 +60,13 @@ const Products = () => {
             discount: 45,
             image: '/products/shirt6.jpg',
         },
-        {
-            title: "Men's Shirt",
-            description: 'Cotton Slim Fit Casual Shirt',
-            price: 2099,
-            discount: 45,
-            image: '/products/shirt7.jpg',
-        },
+        // {
+        //     title: "Men's Shirt",
+        //     description: 'Cotton Slim Fit Casual Shirt',
+        //     price: 2099,
+        //     discount: 45,
+        //     image: '/products/shirt7.jpg',
+        // },
         {
             title: "Men's Shirt",
             description: 'Cotton Slim Fit Casual Shirt',
@@ -94,15 +110,54 @@ const Products = () => {
             image: '/products/shirt13.jpg',
         },
     ]);
-
     return (
         <>
             <Layout>
-                <div>
-                    <h1 className="text-xl font-semibold text-center underline mb-8">
-                        Products
+                <header>
+                    <Swiper
+                        className=" my-10"
+                        modules={[
+                            Navigation,
+                            Pagination,
+                            Scrollbar,
+                            A11y,
+                            Autoplay,
+                        ]}
+                        slidesPerView={1}
+                        navigation
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                        }}
+                        pagination={{ clickable: true }}
+                        scrollbar={{ draggable: true }}
+                    >
+                        <SwiperSlide>
+                            <img src="/products/Banner1.jpg" alt="banner1" />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img src="/products/Banner2.jpg" alt="banner2" />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img src="/products/Banner3.jpg" alt="banner3" />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img src="/products/Banner4.jpg" alt="banner4" />
+                        </SwiperSlide>
+                    </Swiper>
+                </header>
+
+                <div className="p-8 md:p-16">
+                    <h1 className="text-3xl font-bold text-center">
+                        Latest Product
                     </h1>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-15">
+                    <p className="text-gray-600 text-center md:w-7/12 mx-auto mt-2 mb-16">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Possimus asperiores nobis exercitationem error
+                        officia voluptatem iste.
+                    </p>
+
+                    <div className="md:w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-15">
                         {products.map((product, index) => {
                             return (
                                 <div
@@ -143,6 +198,9 @@ const Products = () => {
                                                 ({product.discount}% OFF)
                                             </span>
                                         </h2>
+                                        <button className="border-2 border-[#159A9C] text-[#002333] py-2 mt-3 font-semibold hover:cursor-pointer hover:bg-[#159A9C] hover:text-white w-full">
+                                            Add to cart
+                                        </button>
                                     </div>
                                 </div>
                             );
@@ -154,4 +212,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default Home;

@@ -1,6 +1,7 @@
 import Layout from './Layout';
 import { useState } from 'react';
-const Products = () => {
+
+const Product = () => {
     const [products, setProducts] = useState([
         {
             title: "Men's Shirt",
@@ -91,18 +92,44 @@ const Products = () => {
             description: 'Cotton Slim Fit Casual Shirt',
             price: 2099,
             discount: 45,
+            image: '/products/shirt5.jpg',
+        },
+        {
+            title: "Men's Shirt",
+            description: 'Cotton Slim Fit Casual Shirt',
+            price: 2099,
+            discount: 45,
+            image: '/products/shirt6.jpg',
+        },
+        {
+            title: "Men's Shirt",
+            description: 'Cotton Slim Fit Casual Shirt',
+            price: 2099,
+            discount: 45,
+            image: '/products/shirt7.jpg',
+        },
+        {
+            title: "Men's Shirt",
+            description: 'Cotton Slim Fit Casual Shirt',
+            price: 2099,
+            discount: 45,
             image: '/products/shirt13.jpg',
         },
     ]);
-
     return (
         <>
             <Layout>
-                <div>
-                    <h1 className="text-xl font-semibold text-center underline mb-8">
-                        Products
+                <div className="p-12">
+                    <h1 className="text-3xl font-bold text-center">
+                        Our Product
                     </h1>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-15">
+                    <p className="text-gray-600 text-center w-7/12 mx-auto mt-2 mb-16">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Possimus asperiores nobis exercitationem error
+                        officia voluptatem iste.
+                    </p>
+
+                    <div className="w-10/12 mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-15">
                         {products.map((product, index) => {
                             return (
                                 <div
@@ -143,6 +170,9 @@ const Products = () => {
                                                 ({product.discount}% OFF)
                                             </span>
                                         </h2>
+                                        <button className="border-2 border-[#159A9C] text-[#002333] py-2 mt-3 font-semibold hover:cursor-pointer hover:bg-[#159A9C] hover:text-white w-full">
+                                            Add to cart
+                                        </button>
                                     </div>
                                 </div>
                             );
@@ -154,4 +184,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default Product;
