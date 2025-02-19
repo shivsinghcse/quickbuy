@@ -1,13 +1,7 @@
 import Layout from './Layout';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {
-    Navigation,
-    Pagination,
-    Scrollbar,
-    A11y,
-    Autoplay,
-} from 'swiper/modules';
+import { Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -115,16 +109,9 @@ const Home = () => {
             <Layout>
                 <header>
                     <Swiper
-                        className=" my-10"
-                        modules={[
-                            Navigation,
-                            Pagination,
-                            Scrollbar,
-                            A11y,
-                            Autoplay,
-                        ]}
+                        className="my-6"
+                        modules={[Pagination, Scrollbar, A11y, Autoplay]}
                         slidesPerView={1}
-                        navigation
                         autoplay={{
                             delay: 2500,
                             disableOnInteraction: false,
@@ -133,16 +120,32 @@ const Home = () => {
                         scrollbar={{ draggable: true }}
                     >
                         <SwiperSlide>
-                            <img src="/products/Banner1.jpg" alt="banner1" />
+                            <img
+                                src="/products/Banner1.jpg"
+                                alt="banner1"
+                                className="h-full"
+                            />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <img src="/products/Banner2.jpg" alt="banner2" />
+                            <img
+                                src="/products/Banner2.jpg"
+                                alt="banner2"
+                                className="h-full"
+                            />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <img src="/products/Banner3.jpg" alt="banner3" />
+                            <img
+                                src="/products/Banner3.jpg"
+                                alt="banner3"
+                                className="h-full"
+                            />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <img src="/products/Banner4.jpg" alt="banner4" />
+                            <img
+                                src="/products/Banner4.jpg"
+                                alt="banner4"
+                                className="h-full"
+                            />
                         </SwiperSlide>
                     </Swiper>
                 </header>
@@ -162,12 +165,12 @@ const Home = () => {
                             return (
                                 <div
                                     key={index}
-                                    className=" bg-white  shadow-lg hover:cursor-pointer hover:scale-95 duration-300"
+                                    className=" bg-white  shadow-lg hover:cursor-pointer "
                                 >
                                     <img
                                         src={product.image}
                                         alt="shirt"
-                                        className="rounded-t-md "
+                                        className="rounded-t-md hover:scale-95 duration-300"
                                     />
                                     <div className="p-4">
                                         <h2 className="text-lg font-bold">
@@ -198,8 +201,12 @@ const Home = () => {
                                                 ({product.discount}% OFF)
                                             </span>
                                         </h2>
-                                        <button className="border-2 border-[#159A9C] text-[#002333] py-2 mt-3 font-semibold hover:cursor-pointer hover:bg-[#159A9C] hover:text-white w-full">
+                                        <button className="border-2 border-[#159A9C] py-2 mt-3 font-semibold hover:cursor-pointer hover:bg-[#159A9C] hover:text-white text-[#159A9C] w-full">
+                                            <i className="ri-shopping-cart-fill mr-2 "></i>
                                             Add to cart
+                                        </button>
+                                        <button className="border-2 border-[#159A9C]  py-2 mt-3 font-semibold hover:cursor-pointer bg-[#159A9C] text-white w-full">
+                                            Buy Now
                                         </button>
                                     </div>
                                 </div>

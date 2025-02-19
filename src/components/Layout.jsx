@@ -5,10 +5,10 @@ const Layout = ({ children }) => {
     const [drawerSize, setDrawerSize] = useState(0);
 
     const menus = [
-        // {
-        //     label: 'Home',
-        //     path: '/',
-        // },
+        {
+            label: 'Home',
+            path: '/',
+        },
         {
             label: 'Products',
             path: '/products',
@@ -65,14 +65,14 @@ const Layout = ({ children }) => {
                                     </li>
                                 );
                             })}
-                            <Link
+                            {/* <Link
                                 to="/login"
-                                className="block hover:bg-[#159A9C] w-24 text-center py-4 hover:text-white"
+                                className="block hover:bg-[#159A9C] w-24 text-center py-5 hover:text-white"
                             >
                                 Login
-                            </Link>
+                            </Link> */}
                             <Link
-                                to="/login"
+                                to="/signup"
                                 className="block bg-[#159A9C] text-white py-2 px-5  hover:bg-white  text-center  hover:text-[#002333] font-semibold border-2 border-[#159A9C]"
                             >
                                 Signup
@@ -144,6 +144,8 @@ const Layout = ({ children }) => {
                     </div>
                 </footer>
 
+                {/* nav for mobile  */}
+
                 <div
                     className="bg-[#002333] h-screen fixed top-0 left-0 z-99 duration-300 overflow-hidden"
                     style={{
@@ -166,7 +168,7 @@ const Layout = ({ children }) => {
                                 <li key={index}>
                                     <Link
                                         to={menu.path}
-                                        className="block text-[#DEEFE7] font-semibold border-b-1 border-[#DEEFE7] hover:bg-[#159A9C] pl-6 py-2 hover:text-[#FFFFFF] hover:font-semibold "
+                                        className="block text-[#DEEFE7] font-semibold border-b-1 border-[#DEEFE7] hover:bg-[#159A9C] pl-6 py-2 hover:text-[#FFFFFF] hover:font-semibold duration-300"
                                     >
                                         {menu.label}
                                     </Link>
@@ -180,7 +182,7 @@ const Layout = ({ children }) => {
                             Login
                         </Link>
                         <Link
-                            to="/login"
+                            to="/signup"
                             className="block text-[#DEEFE7] font-semibold border-b-1 border-[#DEEFE7] hover:bg-[#159A9C] pl-6 py-2 hover:text-[#FFFFFF] hover:font-semibold "
                         >
                             Signup

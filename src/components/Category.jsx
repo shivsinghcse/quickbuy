@@ -4,6 +4,18 @@ import Layout from './Layout';
 const Category = () => {
     const [category, setCategory] = useState([
         {
+            title: 'Laptop',
+        },
+        {
+            title: 'Printer',
+        },
+        {
+            title: 'T-Shirt',
+        },
+        {
+            title: 'Shirt',
+        },
+        {
             title: "TV's",
         },
         {
@@ -26,6 +38,18 @@ const Category = () => {
         },
         {
             title: 'Women',
+        },
+        {
+            title: 'Laptop',
+        },
+        {
+            title: 'Printer',
+        },
+        {
+            title: 'T-Shirt',
+        },
+        {
+            title: 'Shirt',
         },
     ]);
     return (

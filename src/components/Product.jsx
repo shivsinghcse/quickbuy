@@ -134,12 +134,12 @@ const Product = () => {
                             return (
                                 <div
                                     key={index}
-                                    className=" bg-white  shadow-lg hover:cursor-pointer hover:scale-95 duration-300"
+                                    className=" bg-white  shadow-lg hover:cursor-pointer "
                                 >
                                     <img
                                         src={product.image}
                                         alt="shirt"
-                                        className="rounded-t-md "
+                                        className="rounded-t-md hover:scale-95 duration-300"
                                     />
                                     <div className="p-4">
                                         <h2 className="text-lg font-bold">
@@ -170,8 +170,12 @@ const Product = () => {
                                                 ({product.discount}% OFF)
                                             </span>
                                         </h2>
-                                        <button className="border-2 border-[#159A9C] text-[#002333] py-2 mt-3 font-semibold hover:cursor-pointer hover:bg-[#159A9C] hover:text-white w-full">
+                                        <button className="border-2 border-[#159A9C] py-2 mt-3 font-semibold hover:cursor-pointer hover:bg-[#159A9C] hover:text-white text-[#159A9C] w-full">
+                                            <i className="ri-shopping-cart-fill mr-2 "></i>
                                             Add to cart
+                                        </button>
+                                        <button className="border-2 border-[#159A9C]  py-2 mt-3 font-semibold hover:cursor-pointer bg-[#159A9C] text-white w-full">
+                                            Buy Now
                                         </button>
                                     </div>
                                 </div>
