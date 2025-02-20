@@ -1,8 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router';
+import firebaseAppConfig from '../utils/firebase-config';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import Shimmer from './Shimmer';
+
+const auth = getAuth(firebaseAppConfig);
 const Layout = ({ children }) => {
     const { pathname } = useLocation();
     const [drawerSize, setDrawerSize] = useState(0);
+    const [session, setSession] = useState(null);
+    const [logOutOpen, setLogOutOpen] = useState(false);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setSession(user);
+            } else {
+                setSession(false);
+            }
+        });
+    }, []);
 
     const menus = [
         {
@@ -22,6 +39,11 @@ const Layout = ({ children }) => {
             path: '/contact',
         },
     ];
+
+    if (session === null) {
+        return <Shimmer />;
+    }
+
     return (
         <>
             <div>
@@ -71,12 +93,50 @@ const Layout = ({ children }) => {
                             >
                                 Login
                             </Link> */}
-                            <Link
-                                to="/signup"
-                                className="block bg-[#159A9C] text-white py-2 px-5  hover:bg-white  text-center  hover:text-[#002333] font-semibold border-2 border-[#159A9C]"
-                            >
-                                Signup
-                            </Link>
+                            {session ? (
+                                <div
+                                    className="relative"
+                                    onClick={() => setLogOutOpen(!logOutOpen)}
+                                >
+                                    <img
+                                        src="/user.jpg"
+                                        alt="default_user_image"
+                                        className="w-10 h-10 rounded-full border hover:cursor-pointer"
+                                    />
+                                    {logOutOpen && (
+                                        <div className="w-36   absolute top-11 -left-15 bg-white shadow-xl shadow-gray-400  rounded-md animate__animated animate__fadeIn">
+                                            <Link
+                                                to="/profile"
+                                                className="flex  hover:bg-[#159a9c8f] hover:text-[#002333] px-3 py-2  border-b-1 border-[#159a9c8f]"
+                                            >
+                                                <i className="ri-user-3-line mr-2"></i>
+                                                My Profile
+                                            </Link>
+                                            <Link
+                                                to="/cart"
+                                                className="flex  hover:bg-[#159a9c8f] hover:text-[#002333] px-3 py-2  border-b-1 border-[#159a9c8f]"
+                                            >
+                                                <i className="ri-shopping-cart-fill mr-2"></i>
+                                                Cart
+                                            </Link>
+                                            <button
+                                                className="flex  hover:bg-[#159a9c8f] hover:text-[#002333] px-3 py-2 hover:cursor-pointer w-full"
+                                                onClick={() => signOut(auth)}
+                                            >
+                                                <i className="ri-logout-circle-line mr-2"></i>
+                                                Logout
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <Link
+                                    to="/login"
+                                    className="block bg-[#159A9C] text-white py-2 px-6  hover:bg-white  text-center  hover:text-[#002333] font-semibold border-2 border-[#159A9C]"
+                                >
+                                    Login
+                                </Link>
+                            )}
                         </ul>
                     </div>
                 </nav>

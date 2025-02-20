@@ -1,9 +1,54 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import firebaseAppConfig from '../utils/firebase-config';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+const auth = getAuth(firebaseAppConfig);
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordType, setPasswordType] = useState('password');
+    const [userCredentials, setUserCredentials] = useState({
+        user_email: '',
+        user_password: '',
+    });
+    const [error, setError] = useState(null);
+    const [loader, setLoader] = useState(false);
+    const navigate = useNavigate();
+
+    const login = async (e) => {
+        e.preventDefault();
+
+        try {
+            setLoader(true);
+            await signInWithEmailAndPassword(
+                auth,
+                userCredentials.user_email,
+                userCredentials.user_password
+            );
+
+            navigate('/');
+            // console.log('login', user);
+        } catch (err) {
+            // console.log(err.message);
+            setError('Invalid email/password.');
+        } finally {
+            setLoader(false);
+        }
+    };
+
+    const handleCredentials = (e) => {
+        const input = e.target;
+        const name = input.name;
+        const value = input.value;
+
+        setUserCredentials({
+            ...userCredentials,
+            [name]: value,
+        });
+        setError(null);
+    };
+
     return (
         <>
             <div className="grid md:grid-cols-2  md:overflow-hidden md:h-screen animate__animated animate__fadeIn">
@@ -16,10 +61,11 @@ const Login = () => {
                 </div>
                 <div className=" flex flex-col p-8  md:p-16 md:justify-center">
                     <h1 className="text-2xl font-bold">Welcome back!</h1>
+
                     <p className="text-lg text-gray-600">
                         Enter email and password to Login
                     </p>
-                    <form className="mt-6 space-y-4">
+                    <form className="mt-6 space-y-4" onSubmit={login}>
                         <div className="flex flex-col">
                             <label
                                 htmlFor="email"
@@ -34,6 +80,7 @@ const Login = () => {
                                 id="email"
                                 placeholder="johndoe@gmail.com"
                                 className="border border-gray-300 rounded-md py-1 px-2   focus:outline-1 focus:outline-[#159A9C] focus:text-[#159A9C]"
+                                onChange={handleCredentials}
                             />
                         </div>
                         <div className="flex flex-col relative">
@@ -50,6 +97,7 @@ const Login = () => {
                                 id="password"
                                 placeholder="********"
                                 className="border border-gray-300 rounded-md py-1 px-2 focus:outline-1 focus:outline-[#159A9C] focus:text-[#159A9C]"
+                                onChange={handleCredentials}
                             />
                             <button
                                 type="button"
@@ -84,13 +132,36 @@ const Login = () => {
                         </Link>
                     </div>
                     <div>
-                        <button className="w-12 h-12 border-2 border-[#159A9C] rounded-full flex justify-center items-center shadow-lg text-3xl font-extrabold absolute bottom-10 right-19 text-[#159A9C] hover:cursor-pointer hover:bg-[#159A9C] hover:text-white duration-300 animate__animated animate__zoomIn animate__infinite animate__slower">
+                        <button className="w-12 h-12 border-2 border-[#159A9C] rounded-full flex justify-center items-center shadow-lg text-3xl font-extrabold absolute bottom-10 right-10 text-[#159A9C] hover:cursor-pointer hover:bg-[#159A9C] hover:text-white duration-300 animate__animated animate__zoomIn animate__infinite animate__slower">
                             <Link to="/">
                                 <i className="ri-home-7-line "></i>
                             </Link>
                         </button>
                     </div>
+                    {error && (
+                        <div className="mt-3 bg-red-200 px-4 py-2 rounded animate__animated animate__pulse flex justify-between items-center">
+                            <p>{error}</p>
+                            <button
+                                className="hover:cursor-pointer hover:border w-6 h-6 rounded-full flex justify-center items-center"
+                                onClick={() => setError(null)}
+                            >
+                                <i className="ri-close-line"></i>
+                            </button>
+                        </div>
+                    )}
                 </div>
+                {loader && (
+                    <div className="w-full h-full bg-[#deefe7d7] fixed top-0 left-0 flex flex-col justify-center items-center">
+                        <svg
+                            className="size-16 rounded-full border-6 border-t-[#159A9C] border-[#B4BEC9] animate-spin"
+                            viewBox="0 0 24 24"
+                        ></svg>
+
+                        <h1 className="text-3xl text-[#159A9C] font-bold">
+                            Redirecting to Home page...
+                        </h1>
+                    </div>
+                )}
             </div>
         </>
     );
